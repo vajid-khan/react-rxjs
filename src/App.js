@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import { initLogin, initLogout } from './lib/actions';
 
 const  App = props => {
-	console.log({props})
 	const [credentials, setCredentials] = useState({
 		email: {
-			value: 'vajid@gmail.com',
+			value: '',
 			error: false
 		},
 		password: {
-			value: '1',
+			value: '',
 			error: false,
 		}
 	});
@@ -52,11 +51,11 @@ const  App = props => {
 					<form onSubmit={onSubmit}>
 						<div className={`form-group ${credentials.email.error ? 'has-error' : ''}`}>
 							<label htmlFor="email">Email address:</label>
-							<input type="email" className="form-control" id="email" value={credentials.email.value} onChange={handleChange} />
+							<input type="email" className="form-control" id="email" required value={credentials.email.value} onChange={handleChange} />
 						</div>
 						<div className={`form-group ${credentials.password.error ? 'has-error' : ''}`}>
 							<label htmlFor="pwd">Password:</label>
-							<input type="password" className="form-control" id="password" value={credentials.password.value} onChange={handleChange} />
+							<input type="password" className="form-control" id="password" required value={credentials.password.value} onChange={handleChange} />
 						</div>
 						<button type="submit" className="btn btn-primary btn-block">
 							{props.showIndicator ? 'Loading...' : 'Submit'}
@@ -69,18 +68,18 @@ const  App = props => {
 }
 
 const mapStateToProps = store => {
-  return {
-    auth:store.auth.auth,
-	user: store.auth.user,
-    showIndicator: store.auth.showIndicator
-  }
+	return {
+		auth:store.auth.auth,
+		user: store.auth.user,
+		showIndicator: store.auth.showIndicator
+	}
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    login:(credentials)=>dispatch(initLogin(credentials)),
-    logout:()=>dispatch(initLogout()),
-  }
+	return {
+		login:(credentials)=>dispatch(initLogin(credentials)),
+		logout:()=>dispatch(initLogout()),
+	}
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);

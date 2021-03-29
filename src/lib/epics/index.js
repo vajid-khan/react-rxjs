@@ -1,4 +1,3 @@
-import 'rxjs';
 import { Observable } from 'rxjs';
 import { showLoginIndicator } from '../actions';
 import { AUTH_ACTION } from '../actions/types';
